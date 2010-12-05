@@ -24,7 +24,7 @@ def threadsafe_function(fn):
         lock.acquire()
         try:
             r = fn(*args, **kwargs)
-        except Exception as e:
+        except Exception, e:
             log.debug('threadsafe exception: %s' % e)
             raise NoMPDConnection
         finally:
@@ -138,3 +138,4 @@ class IncorrectPassword(Exception):
     pass
 class MaxConenctions(Exception):
     pass
+
