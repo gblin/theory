@@ -179,14 +179,14 @@
         % for t in c.playlist:
             <%
                 if 'artist' in t and 'title' in t:
-                    display_title = "%s - %s" % (t['artist'],t['title'])
+                    display_title = "%s - %s" % (t['artist'].decode('utf-8'),t['title'].decode('utf-8'))
                 else:
                     if t['file'].lower().startswith('http://') or t['file'].lower().startswith('https://'):
-                        stream_name = c.g.tc.get_stream_name(t['file'])
+                        stream_name = g.tc.get_stream_name(t['file'])
                         if stream_name:
                             display_title = "%s (stream)" % stream_name 
                         else:
-                            display_title = t['file']
+                            display_title = t['file'].decode('utf-8')
                     else:
                         display_title = t['file']
             %>
@@ -195,9 +195,9 @@
                 <span class="displaytitle">${display_title}</span>
                 % if 'artist' in t and 'album' in t:
                 <div class="playlist-tooltip">
-                    <a onclick="window.parent.artistAlbums('${t['artist'].replace("'","\\'")}')">${t['artist']}</a>
+                    <a onclick="window.parent.artistAlbums('${t['artist'].decode('utf-8').replace("'","\\'")}')">${t['artist'].decode('utf-8')}</a>
                     <br />
-                    <a onclick="window.parent.artistAlbums('${t['artist'].replace("'","\\'")}','${t['album'].replace("'","\\'")}')">${t['album']}</a>
+                    <a onclick="window.parent.artistAlbums('${t['artist'].decode('utf-8').replace("'","\\'")}','${t['album'].decode('utf-8').replace("'","\\'")}')">${t['album'].decode('utf8')}</a>
                     <br />
                     ${h.format_track_time(t)}
 					&lt;<a onclick="playNext(${t['id']})">play this next</a>&gt;
